@@ -1,3 +1,5 @@
+solutions by Aiden Sykes (AidenSykes1999@gmail.com)
+
 # User Management Technical Exercise
 
 The exercise is an ASP.NET Core web application backed by Entity Framework Core, which faciliates management of some fictional users.
