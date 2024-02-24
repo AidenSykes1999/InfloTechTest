@@ -27,6 +27,7 @@ public class UsersController : Controller
                     Forename = p.Forename,
                     Surname = p.Surname,
                     Email = p.Email,
+                    DateofBirth = p.DateofBirth,
                     IsActive = p.IsActive
                 });
         }
@@ -39,6 +40,7 @@ public class UsersController : Controller
                     Forename = p.Forename,
                     Surname = p.Surname,
                     Email = p.Email,
+                    DateofBirth = p.DateofBirth,
                     IsActive = p.IsActive
                 });
         }
