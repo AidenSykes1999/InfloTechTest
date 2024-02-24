@@ -26,6 +26,7 @@ public class UserService : IUserService
     //    throw new NotImplementedException();
     //}
 
+    // Using the same structure as the GetAll feature in order for the code to stay cohesive. FilterbyInactive would be achieved just be != rather than ==
     public IEnumerable<User> FilterByActive(bool isActive) => _dataAccess.GetAll<User>().Where(user => user.IsActive == isActive);
 
     public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
