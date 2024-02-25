@@ -20,19 +20,23 @@ public class UserListItemViewModel
 
 public class AddUserViewModel
 {
+
+    // Validate these values aren't empty.
     [Required(ErrorMessage = "Forename is required")]
-    public string? Forename { get; set; }
+    [StringLength(100, MinimumLength = 1, ErrorMessage = "Forename must be between 1 and 100 characters")]
+    public string Forename { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Surname is required")]
-    public string? Surname { get; set; }
+    [StringLength(100, MinimumLength = 1, ErrorMessage = "Surname must be between 1 and 100 characters")]
+    public string Surname { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Email is required")]
     [EmailAddress(ErrorMessage = "Invalid email address")]
-    public string? Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Date of Birth is required")]
     [DataType(DataType.Date, ErrorMessage = "Invalid date format")]
-    public DateTime DateOfBirth { get; set; }
+    public DateTime DateofBirth { get; set; }
 
     [Required(ErrorMessage = "Active status is required")]
     public bool IsActive { get; set; }

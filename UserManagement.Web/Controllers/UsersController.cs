@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using UserManagement.Data;
+using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
 
@@ -9,7 +11,14 @@ namespace UserManagement.WebMS.Controllers;
 public class UsersController : Controller
 {
     private readonly IUserService _userService;
-    public UsersController(IUserService userService) => _userService = userService;
+    // In order to Add, Update, Delete or Edit, we must also add the data context here and update UsersController to also have it.
+    private readonly IDataContext _dataContext;
+
+    public UsersController(IUserService userService, IDataContext dataContext)
+    {
+        _userService = userService;
+        _dataContext = dataContext;
+    }
 
     [HttpGet]
     public ViewResult List(bool? active)
@@ -72,8 +81,17 @@ public class UsersController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Perform the logic to add the user to the database using your UserService
-            // Example: _userService.AddUser(model.ToUser()); // You need to create this method
+            var newUser = new User
+            {
+                Forename = model.Forename,
+                Surname = model.Surname,
+                Email = model.Email,
+                DateofBirth = model.DateofBirth,
+                IsActive = model.IsActive
+            };
+
+            // Add the new user to the data context
+            _dataContext.Create(newUser);
 
             // Redirect to the user list after successful addition
             return RedirectToAction("List");
