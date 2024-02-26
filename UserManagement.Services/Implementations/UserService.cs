@@ -30,4 +30,11 @@ public class UserService : IUserService
     public IEnumerable<User> FilterByActive(bool isActive) => _dataAccess.GetAll<User>().Where(user => user.IsActive == isActive);
 
     public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
+
+
+    // Implemented GetUserById for view functionality
+    public User? GetUserById(long id)
+    {
+        return _dataAccess.GetById<User>(id);
+    }
 }

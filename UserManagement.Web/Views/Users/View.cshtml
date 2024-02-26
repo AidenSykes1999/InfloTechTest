@@ -1,1 +1,20 @@
-﻿
+﻿@model UserManagement.Web.Models.Users.ViewUserViewModel
+
+<h2>User Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Forename</dt>
+        <dd class="col-sm-10">@Model.Forename</dd>
+
+        <dt class="col-sm-2">Surname</dt>
+        <dd class="col-sm-10">@Model.Surname</dd>
+
+        <dt class="col-sm-2">DateofBirth</dt>
+        <dd class="col-sm-10">@Model.DateofBirth</dd>
+
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+    </dl>
+</div>

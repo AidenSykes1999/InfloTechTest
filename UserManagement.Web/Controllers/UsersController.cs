@@ -99,5 +99,34 @@ public class UsersController : Controller
         // If ModelState is not valid, return to the Add view with the validation errors
         return View(model);
     }
-}
 
+    [Route("view")]
+
+    [HttpGet]
+    public IActionResult View(long id)
+    {
+        // Retrieve the user by id from your UserService
+        var user = _userService.GetUserById(id);
+
+        if (user == null)
+        {
+            // Handle user not found, for example, redirect to the user list
+            return RedirectToAction("List");
+        }
+
+        var model = new ViewUserViewModel
+        {
+            // Populate the ViewModel properties with the user information
+            Id = user.Id,
+            Forename = user.Forename,
+            Surname = user.Surname,
+            Email = user.Email,
+            IsActive = user.IsActive,
+            DateofBirth = user.DateofBirth
+        };
+
+        return View(model);
+    }
+
+
+}

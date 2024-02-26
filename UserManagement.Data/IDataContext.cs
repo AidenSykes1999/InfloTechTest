@@ -11,6 +11,8 @@ public interface IDataContext
     /// <returns></returns>
     IQueryable<TEntity> GetAll<TEntity>() where TEntity : class;
 
+    /// Implement GetById for view user implementation
+    TEntity? GetById<TEntity>(long id) where TEntity : class;
     /// <summary>
     /// Create a new item
     /// </summary>
