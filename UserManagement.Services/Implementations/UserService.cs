@@ -42,4 +42,13 @@ public class UserService : IUserService
     {
         _dataAccess.Update(user);
     }
+
+    public void DeleteUser(long id)
+    {
+        var user = _dataAccess.GetById<User>(id);
+        if (user != null)
+        {
+            _dataAccess.Delete(user);
+        }
+    }
 }

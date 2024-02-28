@@ -130,7 +130,6 @@ public class UsersController : Controller
 
 
     [Route("edit")]
-
     public IActionResult Edit(long id)
     {
         // Retrieve the user by id from your UserService
@@ -185,4 +184,47 @@ public class UsersController : Controller
         // If ModelState is not valid, return to the Edit view with the validation errors
         return View(model);
     }
+    [Route("delete")]
+    [HttpGet]
+    public IActionResult Delete(long id)
+    {
+        // Retrieve user details for confirmation
+        var user = _userService.GetUserById(id);
+
+        if (user == null)
+        {
+            // Handle case where user is not found
+            return NotFound();
+        }
+
+        var deleteViewModel = new DeleteUserViewModel
+        {
+            Id = user.Id,
+            Forename = user.Forename,
+            Surname = user.Surname,
+            Email = user.Email,
+            DateofBirth = user.DateofBirth,
+            IsActive = user.IsActive
+        };
+
+        return View(deleteViewModel);
+    }
+    [Route("deleteconfirmed")]
+    [HttpPost]
+    [ActionName("DeleteConfirmed")]
+    public IActionResult DeleteConfirmed(DeleteUserViewModel model)
+    {
+        if (ModelState.IsValid && model.Confirmation == "DELETE")
+        {
+            // Perform the logic to delete the user in the database using your UserService
+            _userService.DeleteUser(model.Id);
+
+            // Redirect to the user list after successful deletion
+            return RedirectToAction("List");
+        }
+
+        // If ModelState is not valid or confirmation is not correct, return to the Delete view with errors
+        return View(model);
+    }
+
 }

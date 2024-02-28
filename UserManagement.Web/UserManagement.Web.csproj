@@ -8,4 +8,12 @@
     <ProjectReference Include="..\UserManagement.Services\UserManagement.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Users\DeleteConfirmed.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Users\DeleteConfirmed.cshtml" />
+  </ItemGroup>
+
 </Project>
