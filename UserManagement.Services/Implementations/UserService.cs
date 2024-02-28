@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Data;
 using UserManagement.Models;
@@ -36,5 +35,11 @@ public class UserService : IUserService
     public User? GetUserById(long id)
     {
         return _dataAccess.GetById<User>(id);
+    }
+
+    // Implemented Update User for updating user functionality
+    public void UpdateUser(User user)
+    {
+        _dataAccess.Update(user);
     }
 }

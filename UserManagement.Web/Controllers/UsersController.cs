@@ -129,4 +129,60 @@ public class UsersController : Controller
     }
 
 
+    [Route("edit")]
+
+    public IActionResult Edit(long id)
+    {
+        // Retrieve the user by id from your UserService
+        var user = _userService.GetUserById(id);
+
+        if (user == null)
+        {
+            // Handle user not found, for example, redirect to the user list
+            return RedirectToAction("List");
+        }
+
+        var model = new EditUserViewModel
+        {
+            // Populate the ViewModel properties with the user information
+            Id = user.Id,
+            Forename = user.Forename,
+            Surname = user.Surname,
+            Email = user.Email,
+            IsActive = user.IsActive,
+            DateofBirth = user.DateofBirth
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(EditUserViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            // Perform the logic to update the user in the database using your UserService
+            var user = _userService.GetUserById(model.Id);
+
+            if (user != null)
+            {
+                user.Forename = model.Forename;
+                user.Surname = model.Surname;
+                user.Email = model.Email;
+                user.DateofBirth = model.DateofBirth;
+                user.IsActive = model.IsActive;
+
+                _userService.UpdateUser(user);
+
+                // Redirect to the user list after successful edit
+                return RedirectToAction("List");
+            }
+
+            // Handle the case where the user is not found
+            return NotFound();
+        }
+
+        // If ModelState is not valid, return to the Edit view with the validation errors
+        return View(model);
+    }
 }

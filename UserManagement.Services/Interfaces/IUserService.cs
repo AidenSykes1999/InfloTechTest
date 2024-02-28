@@ -15,5 +15,7 @@ public interface IUserService
 
     /// Implementation for View user
     User? GetUserById(long id);
+    void UpdateUser(User user);
+
 }
 

@@ -39,9 +39,10 @@ public class DataContext : DbContext, IDataContext
         SaveChanges();
     }
 
+    // Update already exists in DataContext, but requires additional implementation.
     public new void Update<TEntity>(TEntity entity) where TEntity : class
     {
-        base.Update(entity);
+        Entry(entity).State = EntityState.Modified;
         SaveChanges();
     }
 
